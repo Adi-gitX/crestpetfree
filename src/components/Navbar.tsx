@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import Logo from '../assets/crest-logo.svg';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Heart, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +29,7 @@ const Navbar = () => {
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'backdrop-blur-xl bg-white/20 shadow-lg rounded-b-3xl mx-4 mt-2'
+          ? 'backdrop-blur-xl bg-white/20 shadow-lg rounded-3xl mx-4 mt-2'
           : 'backdrop-blur-lg bg-white/10'
       }`}
       initial={{ y: -100 }}
@@ -40,13 +41,16 @@ const Navbar = () => {
           isScrolled ? 'h-16' : 'h-20'
         }`}>
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-2 rounded-xl">
-              <Heart className="w-6 h-6 text-white" fill="currentColor" />
-            </div>
-            <span className="font-bold text-xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              Crest
-            </span>
+          <Link to="/" className="flex items-center">
+            <motion.img
+              src={Logo}
+              alt="Crest logo"
+              className="w-32 h-32 md:w-36 md:h-36"
+              initial={{ scale: 1 }}
+              animate={isScrolled ? { scale: 0.9 } : { scale: 1 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              style={{ transformOrigin: 'left center' }}
+            />
           </Link>
 
           {/* Desktop Navigation */}
